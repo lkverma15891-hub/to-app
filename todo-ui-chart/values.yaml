@@ -1,0 +1,48 @@
+common:
+  containerRegistryURL: todoapp.azurecr.io
+  ingressClass: azure-application-gateway
+  
+ui:
+  replicas: 2
+  image:
+    name: todo-ui
+    tag: v4
+  port: 80
+  ServicePort: 80
+  ingress:
+    host: dev-ui.jhandu.shop
+
+getTask:
+  replicas: 2
+  image:
+    name: todo-get-tasks-api
+    tag: v1
+  port: 8000
+  ServicePort: 80
+  connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=tcp:infra-server.database.windows.net,1433;Database=to-do-database;Uid=4dm1n157r470r;Pwd=4-v3ry-53cr37-p455w0rd;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+  ingress:
+    host: dev-get-tasks-api.jhandu.shop
+    ingressClass: azure-application-gateway
+
+deleteTask:
+  replicas: 2
+  image:
+    name: todo-delete-tasks-api
+    tag: v1
+  port: 8000
+  ServicePort: Driver={ODBC Driver 18 for SQL Server};Server=tcp:infra-server.database.windows.net,1433;Database=to-do-database;Uid=4dm1n157r470r;Pwd=4-v3ry-53cr37-p455w0rd;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+  ingress:
+    host: dev-delete-task-api.jhandu.shop
+    ingressClass: azure-application-gateway
+
+addTask:
+  replicas: 2
+  image:
+    name: todo-add-tasks-api
+    tag: v1
+  port: 8000
+  ServicePort: 80
+  connectionString: Driver={ODBC Driver 18 for SQL Server};Server=tcp:infra-server.database.windows.net,1433;Database=to-do-database;Uid=4dm1n157r470r;Pwd=4-v3ry-53cr37-p455w0rd;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+  ingress:
+    host: dev-add-task-api.jhandu.shop
+    ingressClass: nginx
