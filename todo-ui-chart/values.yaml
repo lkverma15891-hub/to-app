@@ -1,6 +1,7 @@
 common:
   containerRegistryURL: todoapp.azurecr.io
-  ingressClass: azure-application-gateway
+  ingressClass: nginx
+
   
 ui:
   replicas: 2

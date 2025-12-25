@@ -1,40 +1,40 @@
 
+# # apiVersion: networking.k8s.io/v1
+# # kind: Ingress
+# # metadata:
+# #   name: argo-cd-ingress
+# #   namespace: argocd
+
+# # spec:
+# #   ingressClassName: azure-application-gateway
+# #   rules:
+# #   - host: dev-argo-cd.jhandu.shop
+# #     http:
+# #       paths:
+# #       - pathType: Prefix
+# #         path: "/"
+# #         backend:
+# #           service:
+# #             name: argocd-server
+# #             port: 
+# #               number: 80
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
 # metadata:
-#   name: argo-cd-ingress
+#   name: argocd-ingress
 #   namespace: argocd
-
+#   annotations:
+#     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 # spec:
-#   ingressClassName: azure-application-gateway
+#   ingressClassName: nginx
 #   rules:
-#   - host: dev-argo-cd.jhandu.shop
+#   - host: argocd.local
 #     http:
 #       paths:
-#       - pathType: Prefix
-#         path: "/"
+#       - path: /
+#         pathType: Prefix
 #         backend:
 #           service:
 #             name: argocd-server
-#             port: 
-#               number: 80
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: argocd-ingress
-  namespace: argocd
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: argocd.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: argocd-server
-            port:
-              number: 443
+#             port:
+#               number: 443
